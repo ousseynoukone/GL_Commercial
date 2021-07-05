@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css\bootstrap.css">
+    <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+
+    
+    <title>Document</title>
+</head>
+<body onload="loadContenu()" style="background-color:rgb(10, 34, 82);">
+    <nav class="navbar navbar-light bg-primary">
+      
+        <div class="container-fluid">
+          <a class="navbar-brand "  style="color: whitesmoke;" href="index.html">
+            Gl-Commercial
+          </a>
+          
+          <span style="color: whitesmoke;" id="client" class="text-center"></span>
+         
+          <button type="button" class="btn btn-primary position-relative"  id="panier">
+                                 <span id="erreur" hidden style="color: red;">Aucune commande n'a été faite </span> 
+
+                      <img src="image/chariot.png" style="padding-right: 4px;"> 
+                      
+
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size:11px;" id="choix">
+              0
+            </span>
+          </button>
+          
+        </div>
+      </nav>
+ <div id="tableau" hidden>
+  <div class="card">
+    <h5 class="card-header text-center" >Panier</h5>
+    <div class="card-body">
+    
+    <table class="table">
+  
+      <tbody id="article">
+        <th>Labelle</th>
+        <th>Prix</th>
+        <th>Quantité</th>
+
+      </tbody>
+    </table>
+          <button type="button" id="validation" onclick="valider()" class="btn btn-primary" ><a href="#Bon" style="color: white;text-decoration: none;">Valider la commande</a></button>
+
+    
+    </div>
+    </div>
+      </div>
+
+    <div class="container" id="contenu">
+ </div>
+      
+
+
+        
+      
+            
+
+        </div  >
+
+       
+
+        
+<div class="container" id="Bon" hidden style="background-color:rgb(10, 34, 82); "  >
+<div class="row">
+  <div class="col-md-12">
+    
+        <div class="mb-3 ml-5 row">
+          <hr class="bg-light mt-4">    <div class="card-header " style="color: white;">Gl-Commercial</div>
+          <div class="card-header text-center" style="color: white;">BON DE COMMANDE</div>
+          <label for="staticEmail" class="col-sm-2 col-form-label"  style="color: white;font-weight: bold;">Client </label><br>
+
+
+          <label for="staticEmail" class="col-sm-12 col-form-label" id="clientName" style="color: white;"> </label><br>
+          <label for="staticEmail" class="col-sm-12 col-form-label" id="clientAdresse" style="color: white;"></label><br>
+          <label for="staticEmail" class="col-sm-12 col-form-label" id="clientNumero"style="color: white;"></label>
+
+          <table class="table" >
+  
+            <tbody id="commnds" style="color: white;">
+              <th>Labelle</th>
+              <th>Prix</th>
+              <th>Quantité</th>
+      
+            </tbody>
+             <span id="date" style="color: white;"></span>
+          </table>
+
+          
+
+      </div>
+    </div>
+  </div>
+</div>
+            <div style="padding:0% 0% 1% 43%;">    <button hidden type="button" onclick="download()" id="hiddenBtn" class="btn btn-primary" ><a style="color: white;text-decoration: none;">Telecharger la facture</a></button></div>    
+
+</body>
+<script src="script.js"></script>
+</html>
