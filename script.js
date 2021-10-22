@@ -12,6 +12,8 @@ let tabArticle = [
     { id: 10, libbelle: "LG g7 ", chemin: "image/51siCaInGRL._AC_SL1123_.jpg", prix: 60000, quantite: 15,  nbr: 0 },
 
 ]
+check=0;
+cpt = 0;
 
 var d=new Date();
 console.log(d)
@@ -40,7 +42,7 @@ const buttonAjouter=document.querySelector("button")
 
 
 
-function displayTab(whereToDisplayTab, tab) {
+function displayTab(whereToDisplayTab, tab) { i=0;
     tab.forEach(telephone => {
     var montant=telephone.prix*telephone.nbr;
 
@@ -50,6 +52,8 @@ function displayTab(whereToDisplayTab, tab) {
       <td>${telephone.prix} FCFA</td>
       <td>${telephone.nbr}</td>
       <td>${montant} FCFA</td>
+      <td> <button id="toHide" onclick="annuler(${i})" class="btn btn-sm btn-outline-danger">❌</button> </td>
+
       
 
     </tr>
@@ -57,10 +61,94 @@ function displayTab(whereToDisplayTab, tab) {
     
     
  `
-    });
+   i++; });
    
 }
 
+function displayTab2(whereToDisplayTab, tab) { i=0;
+    tab.forEach(telephone => {
+    var montant=telephone.prix*telephone.nbr;
+
+        whereToDisplayTab.innerHTML += ` 
+    <tr>
+      <td>${telephone.libbelle}</td>
+      <td>${telephone.prix} FCFA</td>
+      <td>${telephone.nbr}</td>
+      <td>${montant} FCFA</td>
+
+      
+
+    </tr>
+
+    
+    
+ `
+   i++; });
+   
+}
+
+function annuler(i)
+{  
+          cpt--;
+          choix.innerText=cpt;
+         
+         idelement=tabChoixClient[i].id;
+         nmbr=tabChoixClient[i].nbr
+         tabChoixClient[i].nbr=0;
+
+         tabArticle.forEach(element => {
+             if(element.id==idelement)
+             {
+                 element.quantite+=nmbr;
+             }
+             
+         }); 
+             onload();
+         
+            tabChoixClient.splice(i,1)
+            
+        
+            article.innerHTML = ""
+            article.innerHTML += `<th>Designation</th>
+            <th>Prix</th>
+            <th>Quantité</th>
+            <th>Montant</th>
+            `
+        
+        
+        
+            if (tabChoixClient.length != 0) {
+                tabAffiche.removeAttribute("hidden");
+                erreur.setAttribute("hidden", "hidden")
+        
+        
+                displayTab(article, tabChoixClient);
+        
+            } else {
+                erreur.removeAttribute("hidden")
+        
+            }
+            total=0;
+            tabChoixClient.forEach(totalMontant => {
+                var montant=totalMontant.prix*totalMontant.nbr;
+                total+=montant;
+        
+                
+            });
+        
+            article.innerHTML += `<tr>
+             
+            <th colspan="3">Total</th>
+            
+            <td>${total} FCFA</td>
+            
+        
+          </tr>`
+
+            
+
+
+        }
 
 
 const nomClient = (localStorage.nomComplet);
@@ -69,7 +157,8 @@ const telClient = (localStorage.tel)
 client.innerText = "Bienvenue " + nomClient;
 
 var checkOnclickPanier=0
-panier.onclick = function () { checkOnclickPanier=1;
+
+panier.onclick = function () { checkOnclickPanier++;
     article.innerHTML = ""
     article.innerHTML += `<th>Designation</th>
     <th>Prix</th>
@@ -146,7 +235,6 @@ function loadContenu() {
 
 let tabChoixClient = []
 
-cpt = 0;
 
 
 
@@ -187,7 +275,9 @@ function recup(id) {
 
             if (tabChoixClient.includes(telephone) == false) {
                 tabChoixClient.push(telephone);
-                cpt++;
+                document.getElementById("erreur1").setAttribute("hidden","")
+                cpt++;          
+
                 choix.innerText = cpt;
             }
 
@@ -197,6 +287,7 @@ function recup(id) {
     });
 
 
+    
 
 
 
@@ -218,7 +309,7 @@ function recup(id) {
     });
     if(checkOnclickPanier!=0){
 
-        article.innerHTML = ""
+        article.innerHTML = "";
         article.innerHTML += `<th>Designation</th>
         <th>Prix</th>
         <th>Quantité</th>
@@ -227,7 +318,7 @@ function recup(id) {
     
     
     
-        if (tabChoixClient.length != 0) {
+        if (tabChoixClient.length != 0   ) {
             tabAffiche.removeAttribute("hidden");
             erreur.setAttribute("hidden", "hidden")
     
@@ -236,6 +327,7 @@ function recup(id) {
     
         } else {
             erreur.removeAttribute("hidden")
+            
     
         }
         total=0;
@@ -255,17 +347,25 @@ function recup(id) {
     
       </tr>`
     }
-    
-    
-    
-
-
-
 }
+    
+
+
+
+
+
 
 
 
 function valider(){
+   if(tabChoixClient.length==0)
+   {     document.getElementById("Bon").setAttribute("hidden","")
+         document.getElementById("hiddenBtn").setAttribute("hidden","")
+
+       document.getElementById("erreur1").removeAttribute("hidden")
+
+   }else{        document.getElementById("erreur1").setAttribute("hidden","")
+
     
     document.getElementById("Bon").removeAttribute("hidden")
     document.getElementById("clientName").innerText="Nom Compet : "+nomClient;
@@ -279,7 +379,7 @@ function valider(){
     `
 
     
-    displayTab(document.getElementById("commnds"), tabChoixClient);
+    displayTab2(document.getElementById("commnds"), tabChoixClient);
 
    total=0;
     tabChoixClient.forEach(totalMontant => {
@@ -303,7 +403,7 @@ function valider(){
   document.getElementById("hiddenBtn").removeAttribute("hidden") 
 
   document.getElementById("date").innerText="Date: "+ jj+"/"+mm+"/"+aa+" a "+hh+"h : "+mn+" mn "; 
-
+   }
   
 }
 

@@ -5,8 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css\bootstrap.css">
-    <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+    <script src="html2pdf.bundle.js"></script>
 
     
     <title>Document</title>
@@ -33,6 +32,7 @@
           </button>
           
         </div>
+
       </nav>
  <div id="tableau" hidden>
   <div class="card">
@@ -49,6 +49,8 @@
       </tbody>
     </table>
           <button type="button" id="validation" onclick="valider()" class="btn btn-primary" ><a href="#Bon" style="color: white;text-decoration: none;">Valider la commande</a></button>
+          <span  id="erreur1" hidden style="color: red; margin-left: 25%; font-weight: bold;">Toutes les commandes ont étés annulées</span>
+          
 
     
     </div>
